@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import firebase from "firebase/app";
+import firebase from "firebase/compat/app";
 import "firebase/auth";
-import "firebase/firestore";
+import "firebase/compat/firestore";
 
 if (!firebase.apps.length) {
   firebase.initializeApp({
@@ -17,8 +17,38 @@ if (!firebase.apps.length) {
   firebase.app(); // if already initialized, use that one
 }
 
-const auth = firebase.auth();
 const db = firebase.firestore();
 export default function Home() {
-  return <div className="container"></div>;
+  return (
+    <div style={{ display: "flex", height: "100vh", width: "100vh" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          margin: "auto",
+          width: "50vh",
+        }}
+      >
+        <div style={{ fontSize: "56px" }}>Connect with your </div>
+        <div style={{ fontSize: "56px" }}>Peers</div>
+        <div>
+          <button
+            style={{
+              color: "white",
+              backgroundColor: "#24a0ed",
+              height: "58px",
+              Width: "500px",
+              fontSize: "32px",
+              borderRadius: "12px",
+              border: "none",
+              padding: "0 35px",
+              margin: "40px 0",
+            }}
+          >
+            Continue
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 }
