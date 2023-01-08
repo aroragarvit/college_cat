@@ -1,12 +1,17 @@
 import { useState } from "react";
+import SignUp from "./signup";
+import Login from "./login";
 
-export default function AuthModal() {
-  useState[(Name, setName)] = useState("");
+export default function AuthModal(data) {
+  const [aut, setAut] = useState("login");
+  // setopen to false when clicked outside the modal
+
   return (
     <div
       style={{
         height: "100vh",
         width: "100vw",
+        backdropFilter: "blur(3px)",
         display: "flex",
         position: "fixed",
         top: "0",
@@ -17,8 +22,6 @@ export default function AuthModal() {
     >
       <div
         style={{
-          opacity: "1",
-          filter: "blur(0px)",
           borderStyle: "solid",
           borderColor: "black",
           borderWidth: "2px",
@@ -53,6 +56,7 @@ export default function AuthModal() {
               width: "50%",
               fontWeight: "400",
             }}
+            onClick={(e) => setAut("login")}
           >
             Login
           </button>
@@ -64,30 +68,13 @@ export default function AuthModal() {
               borderRadius: " 0px 12px 0px 0px ",
               fontWeight: "400",
             }}
+            onClick={(e) => setAut("signup")}
           >
             Sign-Up
           </button>
         </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            backgroundColor: "green",
-          }}
-        >
-          <div>
-            <input
-              style={{
-                width: "382px",
-                height: "53px",
-                border: "1px solid #000000",
-                borderRadius: "12px",
-              }}
-              type={"text"}
-            ></input>
-          </div>
-        </div>
+
+        {aut === "login" ? <Login /> : <SignUp />}
       </div>
     </div>
   );

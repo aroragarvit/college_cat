@@ -22,6 +22,9 @@ const db = firebase.firestore();
 export default function Home() {
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    console.log(open);
+  }, [open]);
   return (
     <div
       style={{
@@ -29,12 +32,12 @@ export default function Home() {
         height: "100vh",
         width: "100vw",
         justifyContent: "space-evenly",
-        // filter: open ? "blur(2px)" : "none",
+
         padding: "0",
         margin: "0",
       }}
     >
-      {open && <AuthModal />}
+      {open && <AuthModal open={open} setOpen={setOpen} />}
       <div
         style={{
           display: "flex",
