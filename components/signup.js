@@ -100,7 +100,7 @@ export default function SignUp() {
             });
             setLoading(false);
           } catch (err) {
-            toast.error(err);
+            toast.error(err.message);
             setLoading(false);
           }
         }}
