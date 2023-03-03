@@ -1,10 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import axios from "axios";
+import { Bars } from "react-loader-spinner";
+import { toast } from "react-toastify";
+
 export default function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   return (
     <div
@@ -82,20 +86,38 @@ export default function SignUp() {
           fontWeight: "400",
           color: "#FFFFFF",
           textAlign: "center",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
         onClick={async () => {
           try {
+            setLoading(true);
             await axios.post("https://collegebackend.onrender.com/signup", {
               username: name,
               email: email,
               password: password,
             });
+            setLoading(false);
           } catch (err) {
-            alert(err);
+            toast.error(err);
+            setLoading(false);
           }
         }}
       >
-        Sign Me Up !
+        {loading ? (
+          <Bars
+            height="30"
+            width="80"
+            color="#FFFFFF"
+            ariaLabel="bars-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        ) : (
+          "Sign Up"
+        )}
       </button>
     </div>
   );
