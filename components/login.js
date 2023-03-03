@@ -1,6 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import { useState } from "react";
 
 export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+
   return (
     <div
       style={{
@@ -23,10 +29,28 @@ export default function Login() {
           fontWeight: "400",
           paddingLeft: "15px",
         }}
-        type={"email"}
-        placeholder={"Email"}
+        type={"text"}
+        placeholder={"UserName"}
+        onChange={(e) => setName(e.target.value)}
       ></input>
 
+      <input
+        style={{
+          width: "382px",
+          height: "53px",
+          border: "1px solid #000000",
+          borderRadius: "12px",
+          marginTop: "78px",
+          color: "#626262",
+          fontSize: "18px",
+          lineHeight: "27px",
+          fontWeight: "400",
+          paddingLeft: "15px",
+        }}
+        type={""}
+        placeholder={"Email"}
+        onChange={(e) => setEmail(e.target.value)}
+      ></input>
       <input
         style={{
           width: "382px",
@@ -42,6 +66,7 @@ export default function Login() {
         }}
         type={"password"}
         placeholder={"Password"}
+        onChange={(e) => setPassword(e.target.value)}
       ></input>
       <button
         style={{
@@ -57,6 +82,13 @@ export default function Login() {
           fontWeight: "400",
           color: "#FFFFFF",
           textAlign: "center",
+        }}
+        onClick={async () => {
+          await axios.post("https://collegebackend.onrender.com/login", {
+            username: name,
+            email: email,
+            password: password,
+          });
         }}
       >
         Login

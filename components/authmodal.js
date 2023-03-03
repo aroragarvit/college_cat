@@ -7,26 +7,28 @@ export default function AuthModal(data) {
   // setopen to false when clicked outside the modal
 
   return (
-    <div
-      style={{
-        height: "100vh",
-        width: "100vw",
-        backdropFilter: "blur(3px)",
-        display: "flex",
-        position: "fixed",
-        top: "0",
-        left: "0",
-        zIndex: "1",
-        backgroundColor: "rgba(0,0,0,0.5)",
-      }}
-    >
+    <div>
+      <div
+        style={{
+          height: "100vh",
+          width: "100vw",
+          backdropFilter: "blur(3px)",
+          display: "flex",
+          position: "fixed",
+          top: "0",
+          left: "0",
+          zIndex: "0",
+          backgroundColor: "rgba(0,0,0,0.5)",
+        }}
+        onClick={(e) => data.setOpen(false)}
+      ></div>
       <div
         style={{
           borderStyle: "solid",
           borderColor: "black",
           borderWidth: "2px",
           borderRadius: "12px",
-
+          zIndex: "100",
           backgroundColor: "#F5F5F5",
           height: "531px",
           width: "473px",
