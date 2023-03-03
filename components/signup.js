@@ -100,7 +100,8 @@ export default function SignUp() {
             });
             setLoading(false);
           } catch (err) {
-            toast.error(err.message);
+            console.log(err);
+            toast.error(err.response.data.error || "Something went wrong");
             setLoading(false);
           }
         }}
