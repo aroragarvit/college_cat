@@ -1,12 +1,29 @@
 import { useEffect, useState } from "react";
 import AuthModal from "../components/authmodal";
+import axios from "axios";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    console.log(open);
-  }, [open]);
+    const checkLogin = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/onboard", // On board verifies the token then checks user in database then returns 200 if user is found else returns errors
+          { withCredentials: true }
+        );
+        if (response.status === 200) {
+          setLoggedIn(true);
+        }
+      } catch (error) {
+        console.error(error);
+        setLoggedIn(false);
+      }
+    };
+    checkLogin();
+  }, [loggedIn]);
+
   return (
     <div
       style={{

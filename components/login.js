@@ -83,11 +83,13 @@ export default function Login() {
           textAlign: "center",
         }}
         onClick={async () => {
-          await axios.post("https://collegebackend.onrender.com/login", {
-            username: name,
-            email: email,
-            password: password,
-          });
+          try {
+            await axios.post("http://localhost:5000/login", {
+              username: name,
+              email: email,
+              password: password,
+            });
+          } catch (e) {}
         }}
       >
         Login

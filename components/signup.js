@@ -93,7 +93,7 @@ export default function SignUp() {
         onClick={async () => {
           try {
             setLoading(true);
-            await axios.post("https://collegebackend.onrender.com/signup", {
+            await axios.post("https://localhost:5000/signup", {
               username: name,
               email: email,
               password: password,
