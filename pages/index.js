@@ -1,11 +1,14 @@
+import axios from "axios";
 import { useEffect, useState, useContext } from "react";
 import AuthModal from "../components/authmodal";
-import axios from "axios";
 import { AuthContext } from "../context/auth";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
   const { loggedIn, setLoggedIn } = useContext(AuthContext);
+  const router = useRouter();
+
   useEffect(() => {
     const checkLogin = async () => {
       try {
@@ -65,7 +68,9 @@ export default function Home() {
                 padding: "0 35px",
                 margin: "40px 0",
               }}
-              onClick={() => setOpen(true)}
+              onClick={() => {
+                loggedIn ? router.push("/dashboard") : setOpen(true);
+              }}
             >
               Continue
             </button>
