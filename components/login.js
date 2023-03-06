@@ -1,6 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/auth";
+import Cookies from "js-cookie";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -84,12 +86,20 @@ export default function Login() {
         }}
         onClick={async () => {
           try {
-            await axios.post("http://localhost:5000/login", {
+            const res = await axios.post("http://localhost:5000/login", {
               username: name,
               email: email,
               password: password,
             });
-          } catch (e) {}
+            //   const token = Cookies.get("token"); its only for browser local cookies not for server side cookies
+            useContext(AuthContext).setLoggedIn(true);
+            const token2 = res.data.token;
+            console.log(token2);
+
+            Cookies.set("token", token2);
+          } catch (e) {
+            console.log(e);
+          }
         }}
       >
         Login

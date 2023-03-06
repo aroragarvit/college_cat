@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import AuthModal from "../components/authmodal";
 import axios from "axios";
+import { AuthContext } from "../context/auth";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
-  const [loggedIn, setLoggedIn] = useState(false);
-
+  const AuthContext = useContext(AuthContext);
   useEffect(() => {
     const checkLogin = async () => {
       try {
@@ -14,11 +14,11 @@ export default function Home() {
           { withCredentials: true }
         );
         if (response.status === 200) {
-          setLoggedIn(true);
+          AuthContext.setLoggedIn(true);
         }
       } catch (error) {
         console.error(error);
-        setLoggedIn(false);
+        AuthContext.setLoggedIn(false);
       }
     };
     checkLogin();
