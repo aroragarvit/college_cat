@@ -5,7 +5,7 @@ import { AuthContext } from "../context/auth";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
-  const AuthContext = useContext(AuthContext);
+  const { loggedIn, setLoggedIn } = useContext(AuthContext);
   useEffect(() => {
     const checkLogin = async () => {
       try {
@@ -14,11 +14,11 @@ export default function Home() {
           { withCredentials: true }
         );
         if (response.status === 200) {
-          AuthContext.setLoggedIn(true);
+          setLoggedIn(true);
         }
       } catch (error) {
         console.error(error);
-        AuthContext.setLoggedIn(false);
+        setLoggedIn(false);
       }
     };
     checkLogin();

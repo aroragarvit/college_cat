@@ -8,6 +8,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const { loggedIn, setLoggedIn } = useContext(AuthContext);
 
   return (
     <div
@@ -92,12 +93,13 @@ export default function Login() {
               password: password,
             });
             //   const token = Cookies.get("token"); its only for browser local cookies not for server side cookies
-            useContext(AuthContext).setLoggedIn(true);
+            setLoggedIn(true);
             const token2 = res.data.token;
             console.log(token2);
 
             Cookies.set("token", token2);
           } catch (e) {
+            setLoggedIn(false);
             console.log(e);
           }
         }}
