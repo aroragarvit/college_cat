@@ -93,12 +93,13 @@ export default function SignUp() {
         onClick={async () => {
           try {
             setLoading(true);
-            await axios.post("https://localhost:5000/signup", {
+            const response = await axios.post("http://localhost:5000/signup", {
               username: name,
               email: email,
               password: password,
             });
             setLoading(false);
+            toast.success(response.data.message);
           } catch (err) {
             console.log(err);
             toast.error(err.response.data.error || "Something went wrong");
